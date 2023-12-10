@@ -22,14 +22,11 @@ defmodule TodoPhoenixWeb.ItemControllerTest do
   end
 
   describe "create item" do
-    test "redirects to show when data is valid", %{conn: conn} do
+    test "redirects to list view when data is valid", %{conn: conn} do
       conn = post(conn, ~p"/items", item: @create_attrs)
 
-      assert %{id: id} = redirected_params(conn)
-      assert redirected_to(conn) == ~p"/items/#{id}"
-
-      conn = get(conn, ~p"/items/#{id}")
-      assert html_response(conn, 200) =~ "Item #{id}"
+      assert %{} = redirected_params(conn)
+      assert redirected_to(conn) == ~p"/items/"
     end
 
     test "renders errors when data is invalid", %{conn: conn} do
